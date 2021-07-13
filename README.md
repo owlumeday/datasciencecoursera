@@ -1,7 +1,6 @@
 "# Tidy Data Assignment
 
-1. Get and merge the data
-##STEP 1 - Loading raw data sets.
+# STEP 1 - Loading and Merging raw data sets.
 
 library(plyr)
 library(data.table)
@@ -19,7 +18,7 @@ yDataSet <- rbind(yTrain, yTest)
 subjectDataSet <- rbind(subjectTrain, subjectTest)
 dim(xDataSet)
 
-##STEP 2 - Extract only the measurements on the mean and standard deviation for each measurement.
+# STEP 2 - Extract only the measurements on the mean and standard deviation for each measurement.
 xData subset based on the logical vector to keep only desired columns, i.e. mean() and std().
 
 xDataSet_mean_std <- xDataSet[, grep("-(mean|std)\\(\\)", read.table("features.txt")[, 2])]
@@ -27,12 +26,14 @@ names(xDataSet_mean_std) <- read.table("features.txt")[grep("-(mean|std)\\(\\)",
 View(xDataSet_mean_std)
 dim(xDataSet_mean_std)
 
-##STEP 3 - Use descriptive activity names to name the activities in the data set.
+
+# STEP 3 - Use descriptive activity names to name the activities in the data set.
 yDataSet[, 1] <- read.table("activity_labels.txt")[yDataSet[, 1], 2]
 names(yDataSet) <- "Activity"
 View(yDataSet)
 
-##STEP 4 - Appropriately label the data set with descriptive activity names.
+
+# STEP 4 - Appropriately label the data set with descriptive activity names.
 names(subjectDataSet) <- "Subject"
 summary(subjectDataSet)
 
@@ -53,7 +54,8 @@ names(singleDataSet) <- gsub('Freq\\.',"Frequency.",names(singleDataSet))
 names(singleDataSet) <- gsub('Freq$',"Frequency",names(singleDataSet))
 
 View(singleDataSet)
-STEP 6 - Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+# STEP 6 - Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 names(singleDataSet)
 
 Data2<-aggregate(. ~Subject + Activity, singleDataSet, mean)
