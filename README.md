@@ -39,7 +39,7 @@ summary(subjectDataSet)
 
 singleDataSet <- cbind(xDataSet_mean_std, yDataSet, subjectDataSet)
 
-## STEP 5 - Defining descriptive names for all variables.
+# STEP 5 - Defining descriptive names for all variables.
 
 names(singleDataSet) <- make.names(names(singleDataSet))
 names(singleDataSet) <- gsub('Acc',"Acceleration",names(singleDataSet))
